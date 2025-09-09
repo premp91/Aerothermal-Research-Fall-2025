@@ -1,0 +1,9 @@
+tar zxf fun3d_intg-14.1-6e82beb.tar.gz
+
+cd fun3d_intg-14.1-6e82beb/
+
+./configure   --prefix=$HOME/fun3d_install   --with-mpi=/usr   --with-parmetis=$HOME/parmetis-install   --with-metis=$HOME/metis-install   --with-gklib=$HOME/gklib-install   --enable-hefss
+
+make
+
+make install
