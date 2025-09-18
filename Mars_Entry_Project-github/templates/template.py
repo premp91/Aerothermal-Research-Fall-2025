@@ -245,7 +245,20 @@ with open(nml_path, "a") as f:
     f.write(f"  first_order_iterations = {int(params['First_Order_Iterations'])}\n")
     f.write("/\n\n")
 
-    # ---- Turbulent control gose here
+    # ---- Turbulence model ----
+    f.write("&turbulent_diffusion_models\n")
+    f.write(f"  turbulence_model = '{params['Turbulence_Model']}'\n")
+    f.write(f"  reynolds_stress_model = '{params.get('Reynolds_Stress_Model')}'\n")
+    f.write(f"  turb_compress_model   = '{params.get('Turb_Compress_Model')}'\n")
+    f.write(f"  prandtlnumber_turbulent = {float(params.get('Prandtl_Turbulent', 0.9))}\n")
+    f.write(f"  schmidtnumber_turbulent = {float(params.get('Schmidt_Turbulent', 1.0))}\n")
+    f.write("/\n\n")
+
+    # ---- Turbulence auxiliary options ----
+    f.write("&turbulence\n")
+    f.write(f"  use_least_squares_gradients = {fbool(params.get('Use_Least_Squares_Gradients'))}\n")
+    f.write(f"  limit_crossd = {fbool(params.get('Limit_CrossD'))}\n")
+    f.write("/\n\n")
 
     # Linear solver control
     f.write("&linear_solver_control\n")
