@@ -69,7 +69,7 @@ How to Run a Case
 3. Access the desired case
 
 ```bash
-cd [desired/case/directory]
+cd [desired/case/directory] 
 ```
 4. Input the variables from pre-processing into the config.json.
   4a. Calculate grid length conversion: (capMeshLength(from .csm) * meshLengthFactor(from config.json) ) / Diameter of spacecraft
