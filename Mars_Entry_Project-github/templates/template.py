@@ -4,6 +4,46 @@ import os
 import json
 import shutil
 
+# =============================================================================
+# Boundary layer parameter helper functions
+# =============================================================================
+
+def skin_friction_coeff(Re_x: float, flow: str = "turbulent") -> float:
+    """
+    Estimate skin-friction coefficient Cf for flat plate.
+    Args:
+        Re_x : Reynolds number based on distance x from leading edge
+        flow : 'laminar' or 'turbulent'
+    Returns:
+        Cf : skin-friction coefficient
+    """
+    if flow == "laminar":
+        # Laminar flat plate
+        return 1.328 / np.sqrt(Re_x)
+    else:
+        # Turbulent flat plate
+        return 0.664 * Re_x**(-0.5) * np.sqrt(2)
+
+
+def first_cell_height(y_plus: float, nu: float, U_inf: float, Re_x: float, flow: str = "turbulent") -> float:
+    """
+    Compute first cell height Δy1 from target y+.
+    Δy1 = y+ * ν / u_tau,  where  u_tau = U_inf * sqrt(Cf/2)
+    """
+    Cf = skin_friction_coeff(Re_x, flow)
+    u_tau = U_inf * np.sqrt(Cf / 2.0)
+    return y_plus * nu / u_tau
+
+
+def total_BL_thickness(dy1: float, N: int, r: float) -> float:
+    """
+    Compute total boundary-layer prism thickness from geometric growth.
+    BL_Thickness = Δy1 * (r^N - 1)/(r - 1)   (if r ≠ 1), else N*Δy1
+    """
+    if r <= 1.0:
+        raise ValueError("Growth ratio r must be > 1.")
+    return dy1 * (r**N - 1.0) / (r - 1.0)
+
 def fbool(x: bool) -> str:
     return ".true." if bool(x) else ".false."
 
@@ -28,13 +68,13 @@ capsProblem = pyCAPS.Problem(problemName="__PROBLEM_NAME__",
 print('\n==> Creating AFLR4 AIM')
 aflr4 = capsProblem.analysis.create(aim="aflr4AIM", name="aflr4")
 
-# Hypersonic-friendly defaults; can be overridden in config.json
+# Aflr4 inputs
 aflr4.input.Mesh_Length_Factor = params.get("Mesh_Length_Factor")
 aflr4.input.max_scale          = params.get("max_scale")
 aflr4.input.ideal_min_scale    = params.get("min_scale")
-aflr4.input.ff_cdfr            = params.get("ff_cdfr")  # push farfield way out
+aflr4.input.ff_cdfr            = params.get("ff_cdfr")
 
-# Local controls + farfield tag
+# Assign geometric groups
 aflr4.input.Mesh_Sizing = {
     "blunt":    {"edgeWeight": params.get("edgeWeight"),
                  "scaleFactor": params.get("blunt_scaleFactor")},
@@ -47,6 +87,43 @@ aflr4.input.Mesh_Sizing = {
 print('\n==> Running AFLR4 (pre/post-analysis)')
 aflr4.runAnalysis()
 
+# =============================================================================
+# Compute BL parameters for AFLR3
+# =============================================================================
+
+# Freestream inputs (use post shock condition)
+U_inf = float(params.get("v2"))           # m/s
+nu    = float(params.get("nu2"))             # m^2/s
+x_ref = float(params.get("x_ref"))             # m
+Re_x  = U_inf * x_ref / nu
+
+# BL strategy: "lowRe" (y=1)
+BL_Mode = params.get("BL_Mode").lower()
+y_plus_target = 1.0 if BL_Mode == "lowre" else 50.0
+
+# Geometric growth & layers
+growth_ratio = float(params.get("BL_Growth_Ratio"))
+N_layers     = int(params.get("BL_Max_Layers", 40))
+
+if N_layers < 1:
+    raise ValueError("BL_Max_Layers must be >= 1.")
+
+# Compute dy1 and total thickness in m
+dy1      = first_cell_height(y_plus_target, nu, U_inf, Re_x, flow="turbulent")
+BL_total = total_BL_thickness(dy1, N_layers, growth_ratio)
+
+if dy1 <= 0.0 or BL_total <= 0.0:
+    raise ValueError("Computed BL parameters are non-positive. Check inputs.")
+
+print(f"Strategy: {BL_Mode} | Re_x={Re_x:.3e}")
+print(f"dy1 (first layer height) = {dy1:.3e} m")
+print(f"Total BL thickness       = {BL_total:.3e} m")
+
+# Optional normalization: set BL_Scale_Length in config.json; leave at 1.0 for meters.
+BL_scale = float(params.get("BL_Scale_Length"))
+BL_Initial_Spacing_in = dy1 / BL_scale
+BL_Thickness_in       = BL_total / BL_scale
+
 #######################################
 ##        Build volume mesh          ##
 #######################################
@@ -56,9 +133,19 @@ aflr3 = capsProblem.analysis.create(aim="aflr3AIM", name="aflr3")
 # Link AFLR4 surface mesh to AFLR3 (parent/child)
 aflr3.input["Surface_Mesh"].link(aflr4.output["Surface_Mesh"])
 
-# Optional: verbosity and BL (keep inviscid for now)
-aflr3.input.Mesh_Quiet_Flag = False
-aflr3.input.Mesh_Sizing = {"Farfield": {"bcType": "Farfield"}}
+# Boundary layer control
+aflr3.input.BL_Initial_Spacing = BL_Initial_Spacing_in   # meters
+aflr3.input.BL_Thickness       = BL_Thickness_in         # meters
+aflr3.input.BL_Max_Layers      = N_layers
+
+# Specify prism boundary layer elements
+aflr3.input.Mesh_Gen_Input_String = "-blc"
+
+# Define groups: mark real walls as Viscous so BL layers are generated
+aflr3.input.Mesh_Sizing = {
+    "blunt":    {"bcType": "Viscous"},
+    "Farfield": {"bcType": "Farfield"}
+}
 
 print("==> Running AFLR3 (pre/post-analysis)")
 aflr3.runAnalysis()
@@ -158,12 +245,14 @@ with open(nml_path, "a") as f:
     f.write(f"  first_order_iterations = {int(params['First_Order_Iterations'])}\n")
     f.write("/\n\n")
 
+    # ---- Turbulent control gose here
+
     # Linear solver control
     f.write("&linear_solver_control\n")
     f.write("  linear_projection = .true.\n")
     f.write("/\n\n")
 
-# Path to nodet_mpi
+# Path to nodet_mpi [...] Need to update
 nodet = "/home/kevinytang/fun3d/fun3d_install/bin/nodet_mpi"
 cmd = f"mpirun -np {np} {nodet} --animation_freq -1 --volume_animation_freq -1"
 
