@@ -106,7 +106,7 @@ In config.json (AFLR4/AFLR3 settings):
 "farfield_scaleFactor": 3.0,
 "ff_cdfr": 3.0
 ```
-
+ 
 2. FUN3D Physics Inputs
 
 Use generic gas model:
