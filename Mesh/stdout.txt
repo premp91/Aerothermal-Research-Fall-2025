@@ -1,0 +1,921 @@
+
+==> Loading geometry from file "075_70deg.csm"...
+--> enter ocsmLoad(filename=C:\Mars_Entry_Project_Analysis\Mesh\075_70deg.csm)
+    nextline ( 0:   1)[   1]: # Constant, Design, and Output Parameters:
+    nextline ( 0:   2)[   1]: 
+    nextline ( 0:   3)[   1]: # Global Attributes:
+    nextline ( 0:   4)[   1]: 
+    nextline ( 0:   5)[   1]: # Main geometry
+    nextline ( 0:   6)[   1]: IMPORT    075_70deg.STEP   -1   0
+    nextline ( 0:   7)[   2]: SELECT body
+    nextline ( 0:   8)[   3]: ATTRIBUTE _name $blunt
+    nextline ( 0:   9)[   3]: ATTRIBUTE capsAIM $fun3dAIM;su2AIM;egadsTessAIM;aflr4AIM;pointwiseAIM;tetgenAIM;aflr3AIM
+    nextline ( 0:  10)[   3]: ATTRIBUTE capsMesh $blunt
+    nextline ( 0:  11)[   3]: ATTRIBUTE capsMeshLength 0.25
+    nextline ( 0:  12)[   3]: 
+    nextline ( 0:  13)[   3]: SELECT face 
+    nextline ( 0:  14)[   4]: ATTRIBUTE capsGroup $blunt
+    nextline ( 0:  15)[   4]: 
+    nextline ( 0:  16)[   4]: # Farfield
+    nextline ( 0:  17)[   4]: SPHERE 0 0 0 50
+    nextline ( 0:  18)[   5]: ATTRIBUTE _name $Farfield
+    nextline ( 0:  19)[   5]: ATTRIBUTE capsAIM $fun3dAIM;su2AIM;egadsTessAIM;aflr4AIM;pointwiseAIM;tetgenAIM;aflr3AIM
+    nextline ( 0:  20)[   5]: ATTRIBUTE capsMesh $Farfield
+    nextline ( 0:  21)[   5]: ATTRIBUTE AFLR_GBC $FARFIELD_UG3_GBC
+    nextline ( 0:  22)[   5]: ATTRIBUTE capsMeshLength 0.25
+    nextline ( 0:  23)[   5]: ATTRIBUTE .tParam 1.;1.;1;
+    nextline ( 0:  24)[   5]: 
+    nextline ( 0:  25)[   5]: SELECT face 
+    nextline ( 0:  26)[   6]: ATTRIBUTE capsGroup $Farfield
+    nextline ( 0:  27)[   6]: 
+    nextline ( 0:  28)[   6]: 
+    nextline ( 0:  29)[   6]: END
+--> enter ocsmCheck()
+--> checks passed
+--> enter ocsmSave(filename=C:\Mars_Entry_Project_Analysis\Mesh\075_70deg\Scratch\capsRestart.cpc)
+--> enter ocsmCheck()
+--> checks passed
+
+==> Creating AFLR4 AIM
+
+==> Running AFLR4 (pre/post-analysis)
+--> enter ocsmBuild(buildTo=0)
+
+    EGADS version  1.27 (with OpenCASCADE 7.8.1)
+
+    executing [   1] import:     075_70deg.STEP     -1.00000      0.00000
+INFO:: analytic sensitivities unavailable because of IMPORT
+  STEP Reader Info: Using metre
+WARNING:: Node    5 (Edges    5 (2) and    6 (2)) appears to be spurious
+                          Body      1 created  (toler= 1.0000e-07, nnode=   5, nedge=   8, nface=   5)
+    executing [   2] select:   body 
+                     putting Branch Attributes on Body
+    executing [   3] select:   face 
+                     putting Branch Attributes on Face 1
+                     putting Branch Attributes on Face 2
+                     putting Branch Attributes on Face 3
+                     putting Branch Attributes on Face 4
+                     putting Branch Attributes on Face 5
+    executing [   4] sphere:         0.00000      0.00000      0.00000     50.00000
+                          Body      2 created  (toler= 1.0000e-05, nnode=   2, nedge=   6, nface=   2)
+    executing [   5] select:   face 
+                     putting Branch Attributes on Face 1
+                     putting Branch Attributes on Face 2
+    finalizing:
+ 
+AFLR2    : ---------------------------------------
+AFLR2    : AFLR2 LIBRARY
+AFLR2    : ADVANCING-FRONT/LOCAL-RECONNECTION
+AFLR2    : TRIA/QUAD GRID GENERATOR
+AFLR2    : Version Number 9.18.1
+AFLR2    : Version Date   06/11/24 @ 05:52PM
+AFLR2    : Compile OS     CYGWIN_NT-6.1 3.1.7(0.340/5/3) x86_64
+AFLR2    : Compile Date   06/11/24 @ 06:33PM
+AFLR2    : Copyright 1994-2021, D.L. Marcum
+AFLR2    : ---------------------------------------
+ 
+AFLR4    : ---------------------------------------
+AFLR4    : AFLR4 LIBRARY
+AFLR4    : ADVANCING-FRONT/LOCAL-RECONNECTION
+AFLR4    : TRIA/QUAD SURFACE GRID GENERATOR
+AFLR4    : Version Number 11.5.15
+AFLR4    : Version Date   07/19/24 @ 07:04PM
+AFLR4    : Compile OS     CYGWIN_NT-6.1 3.1.7(0.340/5/3) x86_64
+AFLR4    : Compile Date   07/19/24 @ 07:31PM
+AFLR4    : Copyright 1994-2021, D.L. Marcum
+AFLR4    : ---------------------------------------
+
+EGADS    : ---------------------------------------
+EGADS    : Engineering Geometry Aircraft Design System
+EGADS    : Version 1.27
+EGADS    : OpenCASCADE Version 7.8.1
+EGADS    : ---------------------------------------
+
+EGADS    : EGADS CAD Geometry Setup
+
+EGADS    : Model has 2 Active Bodies
+
+EGADS    : Body 0 is a SolidBody
+EGADS    : Body 0 has 1 Shells
+EGADS    : Body 0 has 5 Faces
+EGADS    : Body 0 has 8 Edges
+EGADS    : Body 0 has 5 Loops
+EGADS    : Body 0 has 5 Nodes
+EGADS    : Body 1 is a SolidBody
+EGADS    : Body 1 has 1 Shells
+EGADS    : Body 1 has 2 Faces
+EGADS    : Body 1 has 6 Edges
+EGADS    : Body 1 has 2 Loops
+EGADS    : Body 1 has 2 Nodes
+
+EGADS    : Check Grid BCs
+
+EGADS    : Grid BCs are OK
+
+EGADS    : Face Neighbor-Faces Information
+
+EGADS    : QC  = Face Quad Combination Flag
+EGADS    : IER = Face Isolated Edge Refinement Flag
+EGADS    : ER  = Face Edge Refinement Factor
+EGADS    :       Not applicable for Faces with a FarField Grid BC.
+EGADS    : SF  = Face Scale Factor
+EGADS    :       Not applicable for Faces with a FarField Grid BC.
+
+EGADS    :   Face          Body    QC   IER       ER    Scale   Neighbor
+EGADS    :     ID  Active    ID  Flag  Flag   Weight   Factor   Faces
+EGADS    :      1     Yes     0     0     1        0        1   2 4 5
+EGADS    :      2     Yes     0     0     1        0        1   1 3
+EGADS    :      3     Yes     0     0     1        0        1   2 5
+EGADS    :      4     Yes     0     0     1        0        1   1 5
+EGADS    :      5     Yes     0     0     1        0        1   1 3 4
+EGADS    :      6     Yes     1     0     1       NA       NA   7
+EGADS    :      7     Yes     1     0     1       NA       NA   6
+
+EGADS    : Face Edges Information
+
+EGADS    :   Face   Edges
+EGADS    :      1   1 2 -3 -4
+EGADS    :      2   -5 6 -1
+EGADS    :      3   -6 5 -7
+EGADS    :      4   3 8
+EGADS    :      5   -2 7 4 -8
+EGADS    :      6   -9 -10 11 12
+EGADS    :      7   -13 -12 14 10
+
+EGADS    : Face Loops Information
+
+EGADS    :   Face   Loops
+EGADS    :      1   1
+EGADS    :      2   2
+EGADS    :      3   3
+EGADS    :      4   4
+EGADS    :      5   5
+EGADS    :      6   6
+EGADS    :      7   7
+
+EGADS    : Loop Edges Information
+
+EGADS    :   Loop  Active   Edges
+EGADS    :      1     Yes   1 2 -3 -4
+EGADS    :      2     Yes   -5 6 -1
+EGADS    :      3     Yes   -6 5 -7
+EGADS    :      4     Yes   3 8
+EGADS    :      5     Yes   -2 7 4 -8
+EGADS    :      6     Yes   -9 -10 11 12
+EGADS    :      7     Yes   -13 -12 14 10
+
+EGADS    : Edge Node, Scale Factor, and Neighbor-Faces Information
+
+EGADS    : ESF = Edge Scale Factor
+EGADS    :       Not applicable for DEGENERATE Edges or Edges with a FarField
+EGADS    :       Grid BC Neighbor Face.
+
+EGADS    :                                             Neighbor
+EGADS    :   Edge  Body  Active Node1 Node2      ESF   Faces
+EGADS    :      1     0     Yes     1     2        1   1 2
+EGADS    :      2     0     Yes     2     3        1   1 5
+EGADS    :      3     0     Yes     4     3        1   1 4
+EGADS    :      4     0     Yes     1     4        1   1 5
+EGADS    :      5     0     Yes     5     1        1   2 3
+EGADS    :      6     0     Yes     5     2        1   2 3
+EGADS    :      7     0     Yes     2     1        1   3 5
+EGADS    :      8     0     Yes     3     4        1   4 5
+EGADS    :      9     1   DEGEN     6     6        -   6
+EGADS    :     10     1     Yes     7     6       NA   6 7
+EGADS    :     11     1   DEGEN     7     7        -   6
+EGADS    :     12     1     Yes     7     6       NA   6 7
+EGADS    :     13     1   DEGEN     6     6        -   7
+EGADS    :     14     1   DEGEN     7     7        -   7
+
+EGADS    : Node Information
+
+EGADS    :   Node  Active      Coordinates
+EGADS    :      1     Yes       1.40953893      0.513030215                0
+EGADS    :      2     Yes       1.40953893                0                0
+EGADS    :      3     Yes       0.86832619                0                0
+EGADS    :      4     Yes       0.86832619                2                0
+EGADS    :      5     Yes              1.5                0                0
+EGADS    :      6     Yes     3.061617e-15                0               50
+EGADS    :      7     Yes     3.061617e-15                0                0
+
+EGADS    : Face and Edge Match Information
+
+EGADS    : No Face Matches Found
+
+AFLR4    : Surface Mesh Spacing Setup
+
+AFLR4    : Max Bounding Box Length     = 100
+AFLR4    : Min Bounding Box Length     = 100
+AFLR4    : Max Ref Bounding Box Length = 4
+AFLR4    : Min Ref Bounding Box Length = 0.631674
+AFLR4    : Reference Length            = 0.25
+AFLR4    : BL Thickness                = 0
+AFLR4    : FarField Spacing            = 16.0002
+AFLR4    : Abs Min Surf Spacing        = 0.000125
+AFLR4    : Min Surf Spacing            = 0.00025
+AFLR4    : Max Surf Spacing            = 0.125
+AFLR4    : Global Scale Factor         = 1
+
+AFLR4    : Geometry Definition Information
+
+AFLR4    : Definition              Definition   Composite             Grid BC
+AFLR4    :         ID                    Type          ID                Type
+AFLR4    :          0     glue-only composite           -                   -
+AFLR4    :          1            CAD geometry           0            STD w/BL
+AFLR4    :          2            CAD geometry           0            STD w/BL
+AFLR4    :          3            CAD geometry           0            STD w/BL
+AFLR4    :          4            CAD geometry           0            STD w/BL
+AFLR4    :          5            CAD geometry           0            STD w/BL
+AFLR4    :          6            CAD geometry           0            FARFIELD
+AFLR4    :          7            CAD geometry           0            FARFIELD
+
+AFLR4    : Define CAD surface definition 1
+AFLR4    : Define CAD surface definition 2
+AFLR4    : Define CAD surface definition 3
+AFLR4    : Define CAD surface definition 4
+AFLR4    : Define CAD surface definition 5
+AFLR4    : Define CAD surface definition 6
+AFLR4    : Define CAD surface definition 7
+
+AFLR4    : Surface Grid Generation
+
+AFLR4    : Generate optimal mesh on surface definition 1
+AFLR2    : Nodes, Trias,Quads=       340       589         0
+AFLR4    : Nodes, Trias,Quads=       535       979         0
+
+AFLR4    : Generate optimal mesh on surface definition 2
+AFLR2    : Nodes, Trias,Quads=        44        65         0
+AFLR4    : Nodes, Trias,Quads=        42        61         0
+
+AFLR4    : Generate optimal mesh on surface definition 3
+AFLR2    : Nodes, Trias,Quads=        44        65         0
+AFLR4    : Nodes, Trias,Quads=        42        61         0
+
+AFLR4    : Generate optimal mesh on surface definition 4
+AFLR2    : Nodes, Trias,Quads=      1479      2856         0
+AFLR4    : Nodes, Trias,Quads=       990      1878         0
+
+AFLR4    : Generate optimal mesh on surface definition 5
+AFLR2    : Nodes, Trias,Quads=       348       605         0
+AFLR4    : Nodes, Trias,Quads=       534       977         0
+
+AFLR4    : Generate optimal mesh on surface definition 6
+AFLR2    : Nodes, Trias,Quads=        34        48         0
+AFLR4    : Nodes, Trias,Quads=        66       112         0
+
+AFLR4    : Generate optimal mesh on surface definition 7
+AFLR2    : Nodes, Trias,Quads=        34        48         0
+AFLR4    : Nodes, Trias,Quads=        66       112         0
+
+DGEOM    : Add surface definitions to composite definition 0
+DGEOM    : Glue composite surface definition 0
+DGEOM    : Nodes,Faces,BEdges=      2094      4180       356
+
+AFLR4    : Curvature BG Surface Grid Generation
+
+AFLR4    : Nodes, Faces      =      2094      4180
+
+AFLR4    : Surface Grid Generation
+
+AFLR4    : Generate optimal mesh on surface definition 1
+AFLR2    : Nodes, Trias,Quads=       339       587         0
+AFLR4    : Nodes, Trias,Quads=       565      1039         0
+
+AFLR4    : Generate optimal mesh on surface definition 2
+AFLR2    : Nodes, Trias,Quads=        41        59         0
+AFLR4    : Nodes, Trias,Quads=        46        69         0
+
+AFLR4    : Generate optimal mesh on surface definition 3
+AFLR2    : Nodes, Trias,Quads=        41        59         0
+AFLR4    : Nodes, Trias,Quads=        46        69         0
+
+AFLR4    : Generate optimal mesh on surface definition 4
+AFLR2    : Nodes, Trias,Quads=      1319      2536         0
+AFLR4    : Nodes, Trias,Quads=      1057      2012         0
+
+AFLR4    : Generate optimal mesh on surface definition 5
+AFLR2    : Nodes, Trias,Quads=       345       599         0
+AFLR4    : Nodes, Trias,Quads=       553      1015         0
+
+AFLR4    : Generate optimal mesh on surface definition 6
+AFLR2    : Nodes, Trias,Quads=        31        44         0
+AFLR4    : Nodes, Trias,Quads=        60       102         0
+
+AFLR4    : Generate optimal mesh on surface definition 7
+AFLR2    : Nodes, Trias,Quads=        31        44         0
+AFLR4    : Nodes, Trias,Quads=        60       102         0
+
+DGEOM    : Add surface definitions to composite definition 0
+DGEOM    : Glue composite surface definition 0
+DGEOM    : Nodes,Faces,BEdges=      2208      4408       352
+
+OVERALL  : CPU Time          =     0.104   seconds
+Mapping capsGroup attributes ................
+	Number of unique capsGroup attributes = 2
+	Name = blunt, index = 1
+	Name = Farfield, index = 2
+Mapping capsMesh attributes ................
+	Number of unique capsMesh attributes = 2
+	Name = blunt, index = 1
+	Name = Farfield, index = 2
+
+Getting mesh sizing parameters
+	Mesh sizing name - Farfield
+	Mesh sizing name - blunt
+	Done getting mesh sizing parameters
+Body 1 (of 2)
+Number of nodes    = 2104
+Number of elements = 4204
+Number of triangle elements      = 4204
+Number of quadrilateral elements = 0
+Body 2 (of 2)
+Number of nodes    = 104
+Number of elements = 204
+Number of triangle elements      = 204
+Number of quadrilateral elements = 0
+----------------------------
+Total number of nodes    = 2208
+Total number of elements = 4408
+Total number of triangle elements      = 4408
+Total number of quadrilateral elements = 0
+Strategy: lowre | Re_x=2.667e+07
+dy1 (first layer height) = 2.410e-06 m
+Total BL thickness       = 1.770e-02 m
+
+==> Creating AFLR3 AIM
+==> Running AFLR3 (pre/post-analysis)
+ 
+UG PARAM : SETTING INPUT PARAMETERS FROM ARGUMENT VECTOR
+ 
+UG PARAM : mbl                         = 1         
+UG PARAM : nbl                         = 40        
+UG PARAM : mblelc                      = 2         
+UG PARAM : mrecm                       = 2         
+UG PARAM : mrecqm                      = 3         
+UG PARAM : mbl                         = 1         
+UG PARAM : mrecm                       = 2         
+UG PARAM : mrecqm                      = 3         
+UG PARAM : mblelc                      = 1         
+UG PARAM : BC_IDs                  [ 0]= 1         
+UG PARAM : BC_IDs                  [ 1]= 2         
+UG PARAM : BC_IDs                  [ 2]= 3         
+UG PARAM : BC_IDs                  [ 3]= 4         
+UG PARAM : BC_IDs                  [ 4]= 5         
+UG PARAM : BC_IDs                  [ 5]= 6         
+UG PARAM : BC_IDs                  [ 6]= 7         
+UG PARAM : BL_DS                   [ 0]= 6.02493e-07
+UG PARAM : BL_DS                   [ 1]= 6.02493e-07
+UG PARAM : BL_DS                   [ 2]= 6.02493e-07
+UG PARAM : BL_DS                   [ 3]= 6.02493e-07
+UG PARAM : BL_DS                   [ 4]= 6.02493e-07
+UG PARAM : BL_DS                   [ 5]= 0         
+UG PARAM : BL_DS                   [ 6]= 0         
+UG PARAM : BL_DEL                  [ 0]= 0.00442463
+UG PARAM : BL_DEL                  [ 1]= 0.00442463
+UG PARAM : BL_DEL                  [ 2]= 0.00442463
+UG PARAM : BL_DEL                  [ 3]= 0.00442463
+UG PARAM : BL_DEL                  [ 4]= 0.00442463
+UG PARAM : BL_DEL                  [ 5]= 0         
+UG PARAM : BL_DEL                  [ 6]= 0         
+UG PARAM : mpfrmt                      = 0         
+
+EGADS    : ---------------------------------------
+EGADS    : Engineering Geometry Aircraft Design System
+EGADS    : Version 1.27
+EGADS    : OpenCASCADE Version 7.8.1
+EGADS    : ---------------------------------------
+
+EGADS    : EGADS CAD Geometry Setup
+
+EGADS    : Model has 2 Active Bodies
+
+EGADS    : Body 0 is a SolidBody
+EGADS    : Body 0 has 1 Shells
+EGADS    : Body 0 has 5 Faces
+EGADS    : Body 0 has 8 Edges
+EGADS    : Body 0 has 5 Loops
+EGADS    : Body 0 has 5 Nodes
+EGADS    : Body 1 is a SolidBody
+EGADS    : Body 1 has 1 Shells
+EGADS    : Body 1 has 2 Faces
+EGADS    : Body 1 has 6 Edges
+EGADS    : Body 1 has 2 Loops
+EGADS    : Body 1 has 2 Nodes
+
+EGADS    : Check Grid BCs
+
+EGADS    : Grid BCs are OK
+
+EGADS    : Face Neighbor-Faces Information
+
+EGADS    : QC  = Face Quad Combination Flag
+EGADS    : IER = Face Isolated Edge Refinement Flag
+EGADS    : ER  = Face Edge Refinement Factor
+EGADS    :       Not applicable for Faces with a FarField Grid BC.
+EGADS    : SF  = Face Scale Factor
+EGADS    :       Not applicable for Faces with a FarField Grid BC.
+
+EGADS    :   Face          Body    QC   IER       ER    Scale   Neighbor
+EGADS    :     ID  Active    ID  Flag  Flag   Weight   Factor   Faces
+EGADS    :      1     Yes     0     0     1        0        1   2 4 5
+EGADS    :      2     Yes     0     0     1        0        1   1 3
+EGADS    :      3     Yes     0     0     1        0        1   2 5
+EGADS    :      4     Yes     0     0     1        0        1   1 5
+EGADS    :      5     Yes     0     0     1        0        1   1 3 4
+EGADS    :      6     Yes     1     0     1       NA       NA   7
+EGADS    :      7     Yes     1     0     1       NA       NA   6
+
+EGADS    : Face Edges Information
+
+EGADS    :   Face   Edges
+EGADS    :      1   1 2 -3 -4
+EGADS    :      2   -5 6 -1
+EGADS    :      3   -6 5 -7
+EGADS    :      4   3 8
+EGADS    :      5   -2 7 4 -8
+EGADS    :      6   -9 -10 11 12
+EGADS    :      7   -13 -12 14 10
+
+EGADS    : Face Loops Information
+
+EGADS    :   Face   Loops
+EGADS    :      1   1
+EGADS    :      2   2
+EGADS    :      3   3
+EGADS    :      4   4
+EGADS    :      5   5
+EGADS    :      6   6
+EGADS    :      7   7
+
+EGADS    : Loop Edges Information
+
+EGADS    :   Loop  Active   Edges
+EGADS    :      1     Yes   1 2 -3 -4
+EGADS    :      2     Yes   -5 6 -1
+EGADS    :      3     Yes   -6 5 -7
+EGADS    :      4     Yes   3 8
+EGADS    :      5     Yes   -2 7 4 -8
+EGADS    :      6     Yes   -9 -10 11 12
+EGADS    :      7     Yes   -13 -12 14 10
+
+EGADS    : Edge Node, Scale Factor, and Neighbor-Faces Information
+
+EGADS    : ESF = Edge Scale Factor
+EGADS    :       Not applicable for DEGENERATE Edges or Edges with a FarField
+EGADS    :       Grid BC Neighbor Face.
+
+EGADS    :                                             Neighbor
+EGADS    :   Edge  Body  Active Node1 Node2      ESF   Faces
+EGADS    :      1     0     Yes     1     2        1   1 2
+EGADS    :      2     0     Yes     2     3        1   1 5
+EGADS    :      3     0     Yes     4     3        1   1 4
+EGADS    :      4     0     Yes     1     4        1   1 5
+EGADS    :      5     0     Yes     5     1        1   2 3
+EGADS    :      6     0     Yes     5     2        1   2 3
+EGADS    :      7     0     Yes     2     1        1   3 5
+EGADS    :      8     0     Yes     3     4        1   4 5
+EGADS    :      9     1   DEGEN     6     6        -   6
+EGADS    :     10     1     Yes     7     6       NA   6 7
+EGADS    :     11     1   DEGEN     7     7        -   6
+EGADS    :     12     1     Yes     7     6       NA   6 7
+EGADS    :     13     1   DEGEN     6     6        -   7
+EGADS    :     14     1   DEGEN     7     7        -   7
+
+EGADS    : Node Information
+
+EGADS    :   Node  Active      Coordinates
+EGADS    :      1     Yes       1.40953893      0.513030215                0
+EGADS    :      2     Yes       1.40953893                0                0
+EGADS    :      3     Yes       0.86832619                0                0
+EGADS    :      4     Yes       0.86832619                2                0
+EGADS    :      5     Yes              1.5                0                0
+EGADS    :      6     Yes     3.061617e-15                0               50
+EGADS    :      7     Yes     3.061617e-15                0                0
+
+EGADS    : Face and Edge Match Information
+
+EGADS    : No Face Matches Found
+
+AFLR4    : Surface Mesh Spacing Setup
+
+AFLR4    : Max Bounding Box Length     = 100
+AFLR4    : Min Bounding Box Length     = 100
+AFLR4    : Max Ref Bounding Box Length = 4
+AFLR4    : Min Ref Bounding Box Length = 0.631674
+AFLR4    : Reference Length            = 0.631674
+AFLR4    : BL Thickness                = 0
+AFLR4    : FarField Spacing            = 11.0794
+AFLR4    : Abs Min Surf Spacing        = 0.00157918
+AFLR4    : Min Surf Spacing            = 0.00315837
+AFLR4    : Max Surf Spacing            = 0.0631674
+AFLR4    : Global Scale Factor         = 1
+
+AFLR4    : Geometry Definition Information
+
+AFLR4    : Definition              Definition   Composite             Grid BC
+AFLR4    :         ID                    Type          ID                Type
+AFLR4    :          0     glue-only composite           -                   -
+AFLR4    :          1            CAD geometry           0            STD w/BL
+AFLR4    :          2            CAD geometry           0            STD w/BL
+AFLR4    :          3            CAD geometry           0            STD w/BL
+AFLR4    :          4            CAD geometry           0            STD w/BL
+AFLR4    :          5            CAD geometry           0            STD w/BL
+AFLR4    :          6            CAD geometry           0            FARFIELD
+AFLR4    :          7            CAD geometry           0            FARFIELD
+
+AFLR4    : Define CAD surface definition 1
+AFLR4    : Define CAD surface definition 2
+AFLR4    : Define CAD surface definition 3
+AFLR4    : Define CAD surface definition 4
+AFLR4    : Define CAD surface definition 5
+AFLR4    : Define CAD surface definition 6
+AFLR4    : Define CAD surface definition 7
+ 
+AFLR43   : INPUT SURFACE MESH FROM TESS
+ 
+AFLR43   : Quad Surface Faces=         0
+AFLR43   : Tria Surface Faces=      4408
+AFLR43   : Nodes             =      2208
+ 
+ 
+UG PARAM : SETTING INPUT PARAMETERS FROM ARGUMENT VECTOR
+ 
+UG PARAM : mbl                         = 1         
+UG PARAM : nbl                         = 40        
+UG PARAM : mblelc                      = 2         
+UG PARAM : mrecm                       = 3         
+UG PARAM : mrecqm                      = 3         
+UG PARAM : mbl                         = 1         
+UG PARAM : mrecm                       = 3         
+UG PARAM : mrecqm                      = 3         
+UG PARAM : mblelc                      = 1         
+UG PARAM : BC_IDs                  [ 0]= 1         
+UG PARAM : BC_IDs                  [ 1]= 2         
+UG PARAM : BC_IDs                  [ 2]= 3         
+UG PARAM : BC_IDs                  [ 3]= 4         
+UG PARAM : BC_IDs                  [ 4]= 5         
+UG PARAM : BC_IDs                  [ 5]= 6         
+UG PARAM : BC_IDs                  [ 6]= 7         
+UG PARAM : BL_DS                   [ 0]= 6.02493e-07
+UG PARAM : BL_DS                   [ 1]= 6.02493e-07
+UG PARAM : BL_DS                   [ 2]= 6.02493e-07
+UG PARAM : BL_DS                   [ 3]= 6.02493e-07
+UG PARAM : BL_DS                   [ 4]= 6.02493e-07
+UG PARAM : BL_DS                   [ 5]= 0         
+UG PARAM : BL_DS                   [ 6]= 0         
+UG PARAM : BL_DEL                  [ 0]= 0.00442463
+UG PARAM : BL_DEL                  [ 1]= 0.00442463
+UG PARAM : BL_DEL                  [ 2]= 0.00442463
+UG PARAM : BL_DEL                  [ 3]= 0.00442463
+UG PARAM : BL_DEL                  [ 4]= 0.00442463
+UG PARAM : BL_DEL                  [ 5]= 0         
+UG PARAM : BL_DEL                  [ 6]= 0         
+UG PARAM : mpfrmt                      = 0         
+ 
+AFLR3    : ---------------------------------------
+AFLR3    : AFLR3 LIBRARY
+AFLR3    : ADVANCING-FRONT/LOCAL-RECONNECTION
+AFLR3    : TETRAHEDRAL GRID GENERATOR
+AFLR3    : Version Number 16.32.50
+AFLR3    : Version Date   10/31/23 @ 06:31PM
+AFLR3    : Compile OS     CYGWIN_NT-6.1 3.1.7(0.340/5/3) x86_64
+AFLR3    : Compile Date   06/11/24 @ 06:35PM
+AFLR3    : Copyright 1994-2021, D.L. Marcum
+AFLR3    : ---------------------------------------
+ 
+AFLR3 IC : INPUT SURFACE GRID CHECK
+ 
+AFLR3 IC : Nodes, Elements   =      2208         0
+
+UG3      : Boundary Conditions
+
+UG3      :  B-Face ID            Boundary Condition
+UG3      :          1                    Solid w/BL
+UG3      :          2                    Solid w/BL
+UG3      :          3                    Solid w/BL
+UG3      :          4                    Solid w/BL
+UG3      :          5                    Solid w/BL
+UG3      :          6                      FarField
+UG3      :          7                      FarField
+ 
+AFLR3    : CPU Time          =     0.006   seconds
+ 
+AFLR3    : DONE
+ 
+ANBL3    : ---------------------------------------
+ANBL3    : ANBL3 LIBRARY
+ANBL3    : ADVANCING-NORMAL
+ANBL3    : BOUNDARY-LAYER (BL)
+ANBL3    : STRUCTURED-LAYER (SL)
+ANBL3    : SPECIFIED NORMAL SPACING (SNS)
+ANBL3    : TETRAHEDRAL/PENTAHEDRAL GRID GENERATOR
+ANBL3    : Version Number 9.34.2
+ANBL3    : Version Date   03/10/23 @ 04:32PM
+ANBL3    : Compile OS     CYGWIN_NT-6.1 3.1.7(0.340/5/3) x86_64
+ANBL3    : Compile Date   06/11/24 @ 06:37PM
+ANBL3    : Copyright 1994-2021, D.L. Marcum
+ANBL3    : ---------------------------------------
+ 
+ANBL3 BLC: BL BOUNDARY CONDITIONS CHECK
+ 
+ANBL3 BLC: Nodes, Elements   =      2208         0
+ 
+ANBL3    : CPU Time          =     0.002   seconds
+ 
+ANBL3    : DONE
+ 
+ANBL3 BLG: BL NODE GENERATION
+ 
+ANBL3 BLG: Nodes, Layer      =         0         0
+ANBL3 BLG: Nodes, Layer      =      4208         2
+ANBL3 BLG: Nodes, Layer      =     71536        34
+ANBL3 BLG: Nodes, Layer      =     73640        35
+ANBL3 BLG: Nodes, Layer      =     75744        36
+ANBL3 BLG: Nodes, Layer      =     77848        37
+ANBL3 BLG: Nodes, Layer      =     79952        38
+ 
+ANBL3    : CPU Time          =     0.265   seconds
+ 
+ANBL3    : DONE
+ 
+AFLR3 IC : INPUT SURFACE GRID CHECK
+ 
+AFLR3 IC : Nodes, Elements   =      2208         0
+ 
+AFLR3    : CPU Time          =     0.002   seconds
+ 
+AFLR3 IG : INITIAL VOLUME GRID GENERATION
+ 
+AFLR3 IG : Nodes, Elements   =      2208         0
+AFLR3 IG : Nodes, Elements   =         8        10
+AFLR3 IG : Nodes, Elements   =       442      2575
+AFLR3 IG : Nodes, Elements   =       884      5326
+AFLR3 IG : Nodes, Elements   =      1326      7849
+AFLR3 IG : Nodes, Elements   =      1768     10356
+AFLR3 IG : Nodes, Elements   =      2210     12639
+AFLR3 IG : Nodes, Elements   =      2215     12656
+AFLR3 IG : Nodes, Elements   =      2215     12603
+AFLR3 IG : Nodes, Elements   =      2208      6000
+AFLR3 IG : Nodes, Elements   =      2208      6005
+AFLR3 IG : Nodes, Elements   =      2208      5383
+AFLR3 IG : Nodes, Elements   =      2208      5322
+ 
+AFLR3    : CPU Time          =     0.023   seconds
+ 
+AFLR3 GG : ISOTROPIC VOLUME GRID GENERATION
+ 
+AFLR3 GG : Nodes, Elements   =      2208      5322
+AFLR3 GG : Nodes, Elements   =      3208      8322
+AFLR3 GG : Nodes, Elements   =      3208     13043
+AFLR3 GG : Nodes, Elements   =      3208     12096
+AFLR3 GG : Nodes, Elements   =      4050     14645
+AFLR3 GG : Nodes, Elements   =      4050     18161
+AFLR3 GG : Nodes, Elements   =      4050     17232
+AFLR3 GG : Nodes, Elements   =      4855     19661
+AFLR3 GG : Nodes, Elements   =      4855     22823
+AFLR3 GG : Nodes, Elements   =      4855     21992
+AFLR3 GG : Nodes, Elements   =      5681     24474
+AFLR3 GG : Nodes, Elements   =      5681     27791
+AFLR3 GG : Nodes, Elements   =      5681     26952
+AFLR3 GG : Nodes, Elements   =      6463     29302
+AFLR3 GG : Nodes, Elements   =      6463     32376
+AFLR3 GG : Nodes, Elements   =      6463     31599
+AFLR3 GG : Nodes, Elements   =      7210     33842
+AFLR3 GG : Nodes, Elements   =      7210     36750
+AFLR3 GG : Nodes, Elements   =      7210     36026
+AFLR3 GG : Nodes, Elements   =      7948     38242
+AFLR3 GG : Nodes, Elements   =      7948     41076
+AFLR3 GG : Nodes, Elements   =      7948     40405
+AFLR3 GG : Nodes, Elements   =      8644     42494
+AFLR3 GG : Nodes, Elements   =      8644     45223
+AFLR3 GG : Nodes, Elements   =      8644     44530
+AFLR3 GG : Nodes, Elements   =      9332     46596
+AFLR3 GG : Nodes, Elements   =      9332     49269
+AFLR3 GG : Nodes, Elements   =      9332     48640
+AFLR3 GG : Nodes, Elements   =      9967     50547
+AFLR3 GG : Nodes, Elements   =      9967     53028
+AFLR3 GG : Nodes, Elements   =      9967     52419
+AFLR3 GG : Nodes, Elements   =     10609     54347
+AFLR3 GG : Nodes, Elements   =     10609     56807
+AFLR3 GG : Nodes, Elements   =     10609     56203
+AFLR3 GG : Nodes, Elements   =     11222     58043
+AFLR3 GG : Nodes, Elements   =     11222     60377
+AFLR3 GG : Nodes, Elements   =     11222     59833
+AFLR3 GG : Nodes, Elements   =     11798     61561
+AFLR3 GG : Nodes, Elements   =     11798     63795
+AFLR3 GG : Nodes, Elements   =     11798     63244
+AFLR3 GG : Nodes, Elements   =     12352     64908
+AFLR3 GG : Nodes, Elements   =     12352     67038
+AFLR3 GG : Nodes, Elements   =     12352     66554
+AFLR3 GG : Nodes, Elements   =     12929     68285
+AFLR3 GG : Nodes, Elements   =     12929     70465
+AFLR3 GG : Nodes, Elements   =     12929     69958
+AFLR3 GG : Nodes, Elements   =     13469     71578
+AFLR3 GG : Nodes, Elements   =     13469     73662
+AFLR3 GG : Nodes, Elements   =     13469     73158
+AFLR3 GG : Nodes, Elements   =     13948     74597
+AFLR3 GG : Nodes, Elements   =     13948     76488
+AFLR3 GG : Nodes, Elements   =     13948     76024
+AFLR3 GG : Nodes, Elements   =     14337     77192
+AFLR3 GG : Nodes, Elements   =     14337     78745
+AFLR3 GG : Nodes, Elements   =     14337     78313
+AFLR3 GG : Nodes, Elements   =     14614     79144
+AFLR3 GG : Nodes, Elements   =     14614     80259
+AFLR3 GG : Nodes, Elements   =     14614     79970
+AFLR3 GG : Nodes, Elements   =     14798     80522
+AFLR3 GG : Nodes, Elements   =     14798     81325
+AFLR3 GG : Nodes, Elements   =     14798     81054
+AFLR3 GG : Nodes, Elements   =     14908     81385
+AFLR3 GG : Nodes, Elements   =     14908     81852
+AFLR3 GG : Nodes, Elements   =     14908     81683
+AFLR3 GG : Nodes, Elements   =     14944     81791
+AFLR3 GG : Nodes, Elements   =     14944     81944
+AFLR3 GG : Nodes, Elements   =     14944     81891
+AFLR3 GG : Nodes, Elements   =     14953     81918
+AFLR3 GG : Nodes, Elements   =     14953     81955
+AFLR3 GG : Nodes, Elements   =     14953     81943
+AFLR3 GG : Nodes, Elements   =     14955     81949
+AFLR3 GG : Nodes, Elements   =     14955     81957
+AFLR3 GG : Nodes, Elements   =     14955     81958
+AFLR3 GG : Nodes, Elements   =     14956     81961
+AFLR3 GG : Nodes, Elements   =     14956     81965
+AFLR3 GG : Nodes, Elements   =     14956     81963
+ 
+AFLR3    : CPU Time          =     0.281   seconds
+ 
+AFLR3 QI : QUALITY IMPROVEMENT
+ 
+AFLR3 QI : Nodes, Elements   =     14956     81963
+AFLR3 QI : Nodes, Elements   =     14907     81691
+AFLR3 QI : Nodes, Elements   =     14904     81674
+AFLR3 QI : Nodes, Elements   =     14904     82151
+AFLR3 QI : Nodes, Elements   =     14904     81700
+AFLR3 QI : Nodes, Elements   =     14904     81518
+AFLR3 QI : Nodes, Elements   =     14904     81607
+AFLR3 QI : Nodes, Elements   =     14904     81487
+AFLR3 QI : Nodes, Elements   =     14904     81467
+AFLR3 QI : Nodes, Elements   =     14904     81554
+AFLR3 QI : Nodes, Elements   =     14904     81467
+AFLR3 QI : Nodes, Elements   =     14904     81453
+AFLR3 QI : Nodes, Elements   =     14904     81550
+AFLR3 QI : Nodes, Elements   =     14904     81461
+AFLR3 QI : Nodes, Elements   =     14904     81450
+AFLR3 QI : Nodes, Elements   =     14904     81540
+AFLR3 QI : Nodes, Elements   =     14904     81454
+AFLR3 QI : Nodes, Elements   =     14904     81444
+ 
+AFLR3    : CPU Time          =     0.167   seconds
+ 
+AFLR3    : DONE
+ 
+ANBL3 BLM: BL VOLUME GRID MERGE
+ 
+ANBL3 BLM: Nodes, Elements   =     14904     81444
+ANBL3 BLM: Nodes, Elements   =     92752    548088
+ANBL3 BLM: Nodes, Elements   =     92752         0
+ 
+ANBL3    : CPU Time          =     0.079   seconds
+ 
+ANBL3    : DONE
+
+OVERALL  : CPU Time          =     0.842   seconds
+
+UG3      : DIHEDRAL ANGLE CHECK
+
+UG3      : No. Tet Elems     =     81444
+UG3      : Min, Max Ang      =     10.39     164.2
+UG3      : Average Angle     =      70.2
+UG3      : No. Angle>160.0   =         1
+UG3      : No. Angle>179.9   =         0
+
+UG3      : No. Prism Elems   =    155548
+UG3      : Min, Max Ang      =     10.03       170
+UG3      : Average Angle     =      80.2
+UG3      : No. Angle>160.0   =      6592
+UG3      : No. Angle>179.9   =         0
+
+UG3      : VOL CHECK
+
+UG3      : Total-Volume      =  4.95e+05
+
+UG3      : No. Tet Elems     =     81444
+UG3      : Min Vol           =  5.03e-05
+UG3      : Average Vol       =      6.07
+UG3      : Total-Tet-Vol     =  4.95e+05
+UG3      : No. Vol<TOL       =         0
+
+UG3      : No. Prism Elems   =    155548
+UG3      : Min Vol           =   9.2e-10
+UG3      : Average Vol       =  2.99e-05
+UG3      : Total-Prism-Vol   =      4.66
+UG3      : No. Vol<TOL       =         0
+
+UG3      : Q VOL-LENGTH-RATIO CHECK
+                      2/3        2
+UG3      : Q = c * Vol   / sum( L  )
+UG3      : 0 <= Q <= 1
+UG3      : Note that L includes scaling for BL-aspect=ratio
+
+UG3      : No. Tet Elems     =     81444
+UG3      : Min, Max Q        =     0.326         1
+UG3      : Average Q         =     0.868
+UG3      : No. Q<       0.1  =         0
+UG3      : No. Q<      0.01  =         0
+
+UG3      : No. Prism Elems   =    155548
+UG3      : Min, Max Q        =     0.525         1
+UG3      : Average Q         =     0.955
+UG3      : No. Q<       0.1  =         0
+UG3      : No. Q<      0.01  =         0
+
+UG3      : CPU Time          =     0.000   seconds
+
+EGADS    : ---------------------------------------
+EGADS    : Engineering Geometry Aircraft Design System
+EGADS    : Version 1.27
+EGADS    : OpenCASCADE Version 7.8.1
+EGADS    : ---------------------------------------
+
+EGADS    : CREATE EGADS TESS FROM AFLR3 DATA
+
+EGADS    : CREATING TESSELLATION FOR BODY 0 EDGE 1
+EGADS    : CREATING TESSELLATION FOR BODY 0 EDGE 2
+EGADS    : CREATING TESSELLATION FOR BODY 0 EDGE 3
+EGADS    : CREATING TESSELLATION FOR BODY 0 EDGE 4
+EGADS    : CREATING TESSELLATION FOR BODY 0 EDGE 5
+EGADS    : CREATING TESSELLATION FOR BODY 0 EDGE 6
+EGADS    : CREATING TESSELLATION FOR BODY 0 EDGE 7
+EGADS    : CREATING TESSELLATION FOR BODY 0 EDGE 8
+
+EGADS    : CREATING TESSELLATION FOR BODY 0 FACE 1
+EGADS    : CREATING TESSELLATION FOR BODY 0 FACE 2
+EGADS    : CREATING TESSELLATION FOR BODY 0 FACE 3
+EGADS    : CREATING TESSELLATION FOR BODY 0 FACE 4
+EGADS    : CREATING TESSELLATION FOR BODY 0 FACE 5
+
+EGADS    : CREATING TESSELLATION FOR BODY 1 EDGE 10
+EGADS    : CREATING TESSELLATION FOR BODY 1 EDGE 12
+
+EGADS    : CREATING TESSELLATION FOR BODY 1 FACE 6
+EGADS    : CREATING TESSELLATION FOR BODY 1 FACE 7
+
+EGADS    : EGADS TESS CREATED
+ 
+UG_IO    : OUTPUT GRID
+ 
+UG_IO    : Writing Data
+ 
+UG_IO    : Grid File Name    = C:\Mars_Entry_Project_Analysis\Mesh\075_70deg\Scratch\aflr3\.b8.ugrid
+UG_IO    : Quad Surface Faces=         0
+UG_IO    : Tria Surface Faces=      4408
+UG_IO    : Quad Int. Faces   =    233322
+UG_IO    : Tria Int. Faces   =    316232
+UG_IO    : Nodes             =     92752
+UG_IO    : Total Elements    =    236992
+UG_IO    : Hex Elements      =         0
+UG_IO    : Pent_5 Elements   =         0
+UG_IO    : Pent_6 Elements   =    155548
+UG_IO    : Tet Elements      =     81444
+ 
+UG_IO    : CPU Time          =     0.025   seconds
+
+EGADS    : CHECK TESS FACE NODE MAP
+
+EGADS    : CHECKING NODE MAP FOR BODY 0 FACE 1
+EGADS    : CHECKING NODE MAP FOR BODY 0 FACE 2
+EGADS    : CHECKING NODE MAP FOR BODY 0 FACE 3
+EGADS    : CHECKING NODE MAP FOR BODY 0 FACE 4
+EGADS    : CHECKING NODE MAP FOR BODY 0 FACE 5
+EGADS    : CHECKING NODE MAP FOR BODY 1 FACE 6
+EGADS    : CHECKING NODE MAP FOR BODY 1 FACE 7
+Mapping capsMesh attributes ................
+	Number of unique capsMesh attributes = 2
+	Name = blunt, index = 1
+	Name = Farfield, index = 2
+Mapping capsGroup attributes ................
+	Number of unique capsGroup attributes = 2
+	Name = blunt, index = 1
+	Name = Farfield, index = 2
+
+Getting mesh sizing parameters
+	Mesh sizing name - Farfield
+	Mesh sizing name - blunt
+	Done getting mesh sizing parameters
+Getting volume mesh
+Volume mesh:
+	Number of nodes          = 92752
+	Number of elements       = 241400
+	Number of triangles      = 4408
+	Number of quadrilatarals = 0
+	Number of tetrahedrals   = 81444
+	Number of pyramids       = 0
+	Number of prisms         = 155548
+	Number of hexahedrals    = 0
+
+Writing vtk file ....
+
+Writing VTK general file ....
+Finished writing VTK file
+
+
+>>> browser2server(text=userName|*host*|*closed*|)
