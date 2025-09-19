@@ -191,7 +191,7 @@ if params.get("Equation_Type", "").lower() in ("generic"): # Update directory as
 nml_path = os.path.join(fun3d.analysisDir, "fun3d.nml")
 with open(nml_path, "a") as f:
     # ----Reference_physical_properties
-    f.write("\&reference_physical_properties\n")
+    f.write("&reference_physical_properties\n")
     f.write(f"  dim_input_type = '{params.get('dim_input_type')}'\n")
     f.write(f"  gridlength_conversion = '{params.get('gridlength_conversion')}'\n") # Modify according to mesh size
     f.write(f"  reynolds_number = '{params.get('Re')}'\n")
@@ -203,7 +203,7 @@ with open(nml_path, "a") as f:
     f.write("/\n\n")
     
     # ---- Governing equations ----
-    f.write("\n&governing_equations\n")
+    f.write("&governing_equations\n")
     f.write(f"  eqn_type = '{params.get('Equation_Type')}'\n")
     f.write(f"  viscous_terms = '{params.get('Viscous')}'\n")
     f.write(f"  chemical_kinetics = '{params.get('chemical_kinetics')}'\n")
