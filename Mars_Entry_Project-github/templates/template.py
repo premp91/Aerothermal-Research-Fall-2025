@@ -3,6 +3,7 @@ import pyCAPS
 import os
 import json
 import shutil
+import numpy as np
 
 # =============================================================================
 # Boundary layer parameter helper functions
@@ -167,6 +168,26 @@ fun3d.input.Overwrite_NML  = params.get("Overwrite_NML", True)
 # MPI procs
 np = int(os.environ.get("FUN3D_MPI_PROCS", str(params.get("np", 4))))
 
+# Iterations and CFL schedule
+fun3d.input.Num_Iter = int(params.get("Num_Iter"))
+fun3d.input.CFL_Schedule = params.get("CFL_Schedule")
+fun3d.input.CFL_Schedule_Iter = params.get("CFL_Schedule_Iter")
+fun3d.input.Restart_Read = params.get("Restart_Read")
+
+# Boundary conditions (example)
+fun3d.input.Boundary_Condition = {
+        "blunt": {
+            "bcType": "Inviscid",
+            "wallTemperature": -1  # adiabatic wall
+        },
+        "Farfield": {
+            "bcType": "Freestream",
+            "machNumber": params.get("Mach"),
+            "totalTemperature": 1.0,
+            "staticPressure": 1.0
+        }
+    }
+
 ########## Run FUN3D ##########
 print("\n\nRunning FUN3D......")
 
@@ -190,49 +211,30 @@ if params.get("Equation_Type", "").lower() in ("generic"): # Update directory as
 # ---- Patch extra blocks into fun3d.nml ----
 nml_path = os.path.join(fun3d.analysisDir, "fun3d.nml")
 with open(nml_path, "a") as f:
-    # ----Reference_physical_properties
+
+    # ---- Reference_physical_properties ----
     f.write("&reference_physical_properties\n")
-    f.write(f"  dim_input_type = '{params.get('dim_input_type')}'\n")
-    f.write(f"  gridlength_conversion = '{params.get('gridlength_conversion')}'\n") # Modify according to mesh size
-    f.write(f"  reynolds_number = '{params.get('Re')}'\n")
-    f.write(f"  velocity = '{params.get('velocity')}'\n")
-    f.write(f"  density = '{params.get('density')}'\n")
-    f.write(f"  temperature = '{params.get('temperature')}'\n")
-    f.write(f"  angle_of_attack = '{params.get('Alpha')}'\n")
-    f.write(f"  angle_of_yaw = '{params.get('Beta')}'\n")
+    f.write(f"  dim_input_type = '{params.get('dim_input_type')}'\n")  # string
+    f.write(f"  gridlength_conversion = {float(params.get('gridlength_conversion'))}\n")
+    f.write(f"  reynolds_number = {float(params.get('Re'))}\n")
+    f.write(f"  velocity = {float(params.get('velocity'))}\n")
+    f.write(f"  density = {float(params.get('density'))}\n")
+    f.write(f"  temperature = {float(params.get('temperature'))}\n")
+    f.write(f"  angle_of_attack = {float(params.get('Alpha'))}\n")
+    f.write(f"  angle_of_yaw = {float(params.get('Beta'))}\n")
     f.write("/\n\n")
-    
+
     # ---- Governing equations ----
     f.write("&governing_equations\n")
-    f.write(f"  eqn_type = '{params.get('Equation_Type')}'\n")
-    f.write(f"  viscous_terms = '{params.get('Viscous')}'\n")
+    f.write(f"  eqn_type = '{params.get('Equation_Type')}'\n")  # string
+    f.write(f"  viscous_terms = '{params.get('Viscous')}'\n")  # string
     f.write(f"  chemical_kinetics = '{params.get('chemical_kinetics')}'\n")
     f.write(f"  thermal_energy_model = '{params.get('thermal_energy_model')}'\n")
-    f.write(f"  prandtlnumber_molecular = '{params.get('prandtlnumber_molecular')}'\n")
-    f.write(f"  gas_radiation = '{params.get('gas_radiation')}'\n")
+    f.write(f"  prandtlnumber_molecular = {float(params.get('prandtlnumber_molecular'))}\n")
+    f.write(f"  gas_radiation = '{params.get('gas_radiation')}'\n")  # string
     f.write(f"  rad_use_impl_lines = {fbool(params.get('rad_use_impl_lines'))}\n")
     f.write(f"  multi_component_diff = {fbool(params.get('multi_component_diff'))}\n")
     f.write("/\n\n")
-
-    # Iterations and CFL schedule
-    fun3d.input.Num_Iter = params.get("Num_Iter")
-    fun3d.input.CFL_Schedule = params.get("CFL_Schedule")
-    fun3d.input.CFL_Schedule_Iter = params.get("CFL_Schedule_Iter")
-    fun3d.input.Restart_Read = params.get("Restart_Read")
-
-    # Boundary conditions (example)
-    fun3d.input.Boundary_Condition = {
-        "blunt": {
-            "bcType": "Inviscid",
-            "wallTemperature": -1  # adiabatic wall
-        },
-        "Farfield": {
-            "bcType": "Freestream",
-            "machNumber": params.get("Mach"),
-            "totalTemperature": 1.0,
-            "staticPressure": 1.0
-        }
-    }
 
     # ---- Inviscid flux method ----
     f.write("&inviscid_flux_method\n")
@@ -249,7 +251,7 @@ with open(nml_path, "a") as f:
     f.write("&turbulent_diffusion_models\n")
     f.write(f"  turbulence_model = '{params['Turbulence_Model']}'\n")
     f.write(f"  reynolds_stress_model = '{params.get('Reynolds_Stress_Model')}'\n")
-    f.write(f"  turb_compress_model   = '{params.get('Turb_Compress_Model')}'\n")
+    f.write(f"  turb_compress_model = '{params.get('Turb_Compress_Model')}'\n")
     f.write(f"  prandtlnumber_turbulent = {float(params.get('Prandtl_Turbulent', 0.9))}\n")
     f.write(f"  schmidtnumber_turbulent = {float(params.get('Schmidt_Turbulent', 1.0))}\n")
     f.write("/\n\n")
@@ -260,13 +262,13 @@ with open(nml_path, "a") as f:
     f.write(f"  limit_crossd = {fbool(params.get('Limit_CrossD'))}\n")
     f.write("/\n\n")
 
-    # Linear solver control
+    # ---- Linear solver control ----
     f.write("&linear_solver_control\n")
     f.write("  linear_projection = .true.\n")
     f.write("/\n\n")
 
 # Path to nodet_mpi [...] Need to update
-nodet = "/home/kevinytang/fun3d/fun3d_install/bin/nodet_mpi"
+nodet = "/home/kevinytang/fun3d/fun3d_install/fun3d/FUN3D_90/nodet_mpi"
 cmd = f"mpirun -np {np} {nodet} --animation_freq -1 --volume_animation_freq -1"
 
 # Freeze limiter (optional)

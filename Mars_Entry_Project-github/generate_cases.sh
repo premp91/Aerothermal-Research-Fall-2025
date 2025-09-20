@@ -89,7 +89,7 @@ for filepath in "$STEP_DIR"/*.STEP "$STEP_DIR"/*.step; do
   "Equation_Type": "generic",
   "Viscous": "inviscid",
   "chemical_kinetics": "finite-rate",
-  "thermal_energy_model": "non-equilb",
+  "thermal_energy_model": "non-equilib",
   "prandtlnumber_molecular": [...],
   "gas_radiation": "off",
   "rad_use_impl_lines": false,
@@ -101,12 +101,11 @@ for filepath in "$STEP_DIR"/*.STEP "$STEP_DIR"/*.step; do
   "Flux_Construction": "stvd",
   "Flux_Construction_LHS": "consistent",
   "Flux_Limiter": "minmod_gg",
-  "Freeze_Limiter": 5000,
   "Re_min_vswch": 50,
   "Re_max_vswch": 500,
   "Adaptive_Shock_Sensor": true,
   "First_Order_Iterations": 2500,
-  "Turbulence_Model": 'sst',
+  "Turbulence_Model": "sst",
   "Reynolds_Stress_Model": "linear",
   "Turb_Compress_Model": "suzen",
   "Prandtl_Turbulent": 0.9,
@@ -116,7 +115,7 @@ for filepath in "$STEP_DIR"/*.STEP "$STEP_DIR"/*.step; do
   "Overwrite_NML": true,
   "Use_Python_NML": true,
   "np": 10,
-  "Species_Dir": "/home/kevinytang/Mars_Entry_Project-github/GasData"
+  "Species_Dir": "/home/kevinytang/Aerothermal-Research-Fall-2025/Mars_Entry_Project-github/GasData"
 }
 EOF
 
