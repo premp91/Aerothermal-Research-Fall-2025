@@ -13,17 +13,17 @@ def skin_friction_coeff(Re_x: float, flow: str = "turbulent") -> float:
     """
     Estimate skin-friction coefficient Cf for flat plate.
     Args:
-        Re_x : Reynolds number based on distance x from leading edge
+        Re_x : Reynolds number for blunt body
         flow : 'laminar' or 'turbulent'
     Returns:
         Cf : skin-friction coefficient
     """
     if flow == "laminar":
         # Laminar flat plate
-        return 1.328 / np.sqrt(Re_x)
+        return 0.664 / np.sqrt(Re_x) * np.sqrt(3)
     else:
         # Turbulent flat plate
-        return 0.664 * Re_x**(-0.5) * np.sqrt(2)
+        return 0.0592 * Re_x**(-0.2) * np.sqrt(2)
 
 
 def first_cell_height(y_plus: float, nu: float, U_inf: float, Re_x: float, flow: str = "turbulent") -> float:
@@ -95,8 +95,7 @@ aflr4.runAnalysis()
 # Freestream inputs (use post shock condition)
 U_inf = float(params.get("v2"))           # m/s
 nu    = float(params.get("nu2"))             # m^2/s
-x_ref = float(params.get("x_ref"))             # m
-Re_x  = U_inf * x_ref / nu
+Re_x  = float(params.get("Re_star"))
 
 # BL strategy: "lowRe" (y=1)
 BL_Mode = params.get("BL_Mode").lower()
@@ -252,8 +251,8 @@ with open(nml_path, "a") as f:
     f.write(f"  turbulence_model = '{params['Turbulence_Model']}'\n")
     f.write(f"  reynolds_stress_model = '{params.get('Reynolds_Stress_Model')}'\n")
     f.write(f"  turb_compress_model = '{params.get('Turb_Compress_Model')}'\n")
-    f.write(f"  prandtlnumber_turbulent = {float(params.get('Prandtl_Turbulent'))}\n")
-    f.write(f"  schmidtnumber_turbulent = {float(params.get('Schmidt_Turbulent'))}\n")
+    f.write(f"  prandtlnumber_turbulent = {float(params.get('Prandtl_Turbulent', 0.9))}\n")
+    f.write(f"  schmidtnumber_turbulent = {float(params.get('Schmidt_Turbulent', 1.0))}\n")
     f.write("/\n\n")
 
     # ---- Turbulence auxiliary options ----
